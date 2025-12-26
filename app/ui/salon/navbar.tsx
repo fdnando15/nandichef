@@ -61,14 +61,15 @@ export default function Navbar() {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("#hero")}
-            className="hover:opacity-80 transition-opacity duration-300 cursor-pointer"
+            className="hover:opacity-80 transition-opacity duration-300 cursor-pointer py-2"
           >
             <Image
               src="/logo.png"
-              alt="Logo"
-              width={280}
-              height={84}
-              className="h-20 w-auto"
+              alt="Nandi Chef"
+              width={240}
+              height={80}
+              className="h-16 w-auto object-contain"
+              priority
             />
           </button>
 
