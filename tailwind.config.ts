@@ -8,21 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        pacifico: ['var(--font-pacifico)', 'cursive'],
+      },
       gridTemplateColumns: {
         "13": "repeat(13, minmax(0, 1fr))",
       },
       colors: {
-        // Hair Salon Brand Colors - Black/White/Red theme
-        salon: {
-          black: "#0a0a0a",
-          "black-light": "#1a1a1a",
-          white: "#ffffff",
-          "white-dark": "#f5f5f5",
-          red: "#dc2626", // Vibrant red accent
-          "red-dark": "#991b1b",
-          "red-light": "#fecaca",
-          gray: "#404040",
-          "gray-light": "#737373",
+        // Nandi Chef Brand Colors - Warm, homemade food theme
+        nandi: {
+          primary: "#E8734E", // Warm orange/terracotta
+          secondary: "#2D5016", // Dark olive green
+          accent: "#F4A261", // Light orange
+          dark: "#2B2B2B", // Near black for text
+          light: "#FAF9F6", // Off-white background
+          alert: "#D4A373", // Beige/golden for allergens
+          whatsapp: "#25D366", // WhatsApp green
         },
         // Keep existing colors for dashboard compatibility
         blue: {
@@ -50,6 +53,7 @@ const config: Config = {
     animation: {
       fadeIn: "fadeIn 0.6s ease-out",
       slideDown: "slideDown 0.3s ease-out",
+      pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
     },
   },
   plugins: [require("@tailwindcss/forms")],

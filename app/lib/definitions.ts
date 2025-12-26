@@ -86,3 +86,24 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+// Nandi Chef Menu Types
+export type MenuCategory = 'starters' | 'mains' | 'desserts' | 'drinks';
+
+export type Allergen = {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+};
+
+export type MenuItem = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: MenuCategory;
+  image: string; // path to image in /public
+  allergens: string[]; // array of allergen IDs
+  available: boolean;
+};
