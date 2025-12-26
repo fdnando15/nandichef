@@ -1,4 +1,4 @@
-import { Inter, Poppins, Pacifico } from "next/font/google";
+import { Inter, Poppins, Pacifico, Lusitana } from "next/font/google";
 
 // Body text - clean and readable
 export const inter = Inter({ 
@@ -20,5 +20,13 @@ export const pacifico = Pacifico({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-pacifico",
+  display: "swap",
+});
+
+// Keep for dashboard compatibility
+export const lusitana = Lusitana({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lusitana",
   display: "swap",
 });
