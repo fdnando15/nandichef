@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 
 const menuCategories = [
   { name: "Inicio", href: "#hero" },
@@ -63,14 +62,9 @@ export default function Navbar() {
             onClick={() => scrollToSection("#hero")}
             className="hover:opacity-80 transition-opacity duration-300 cursor-pointer py-2"
           >
-            <Image
-              src="/logo.png"
-              alt="Nandi Chef"
-              width={240}
-              height={80}
-              className="h-16 w-auto object-contain"
-              priority
-            />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-nandi-primary tracking-tight">
+              Con sabor y cariño
+            </h1>
           </button>
 
           {/* Desktop Navigation */}
