@@ -6,6 +6,8 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
+  Recipe,
+  RecipesTable,
 } from "./definitions";
 import { formatCurrency } from "./utils";
 
@@ -214,5 +216,119 @@ export async function fetchFilteredCustomers(query: string) {
   } catch (err) {
     console.error("Database Error:", err);
     throw new Error("Failed to fetch customer table.");
+  }
+}
+
+// ========================================
+// RECIPES DATA FUNCTIONS
+// ========================================
+
+const RECIPES_PER_PAGE = 2;
+
+// Fetch filtered recipes with pagination
+export async function fetchFilteredRecipes(query: string, currentPage: number) {
+  const offset = (currentPage - 1) * RECIPES_PER_PAGE;
+
+  try {
+    const recipes = await sql<RecipesTable[]>`
+      SELECT
+        id,
+        name,
+        description,
+        price,
+        category,
+        available,
+        image_url,
+        allergens
+      FROM recipes
+      WHERE
+        name ILIKE ${`%${query}%`} OR
+        description ILIKE ${`%${query}%`} OR
+        category ILIKE ${`%${query}%`}
+      ORDER BY name ASC
+      LIMIT ${RECIPES_PER_PAGE} OFFSET ${offset}
+    `;
+
+    return recipes;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch recipes.");
+  }
+}
+
+// Fetch recipe by ID for editing
+export async function fetchRecipeById(id: string) {
+  try {
+    const data = await sql<Recipe[]>`
+      SELECT
+        id,
+        name,
+        description,
+        price,
+        allergens,
+        category,
+        available,
+        image_url
+      FROM recipes
+      WHERE id = ${id};
+    `;
+
+    if (data.length === 0) {
+      throw new Error("Recipe not found.");
+    }
+
+    const recipe = {
+      ...data[0],
+      price: data[0].price / 100, // Convert cents to euros
+    };
+
+    return recipe;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch recipe.");
+  }
+}
+
+// Fetch total pages for pagination
+export async function fetchRecipesPages(query: string) {
+  try {
+    const data = await sql`
+      SELECT COUNT(*)
+      FROM recipes
+      WHERE
+        name ILIKE ${`%${query}%`} OR
+        description ILIKE ${`%${query}%`} OR
+        category ILIKE ${`%${query}%`}
+    `;
+
+    const totalPages = Math.ceil(Number(data[0].count) / RECIPES_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch total number of recipes.");
+  }
+}
+
+// Fetch all recipes (for dropdown selections, etc)
+export async function fetchAllRecipes() {
+  try {
+    const recipes = await sql<RecipesTable[]>`
+      SELECT
+        id,
+        name,
+        description,
+        price,
+        category,
+        available,
+        image_url,
+        allergens
+      FROM recipes
+      ORDER BY category, name ASC
+    `;
+
+    return recipes;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch all recipes.");
   }
 }

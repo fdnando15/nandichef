@@ -144,4 +144,77 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
-export { users, customers, invoices, revenue };
+const recipes = [
+  {
+    id: 'a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d',
+    name: 'Arroz con Pollo',
+    description: 'Arroz casero con pollo tierno y verduras frescas de temporada',
+    price: 850, // 8.50€
+    allergens: ['celery'],
+    category: 'mains',
+    available: true,
+    image_url: '/arroz.png',
+  },
+  {
+    id: 'b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e',
+    name: 'Brownie Casero',
+    description: 'Delicioso brownie de chocolate con nueces crujientes',
+    price: 350, // 3.50€
+    allergens: ['gluten', 'nuts', 'dairy', 'eggs'],
+    category: 'desserts',
+    available: true,
+    image_url: '/brauni.png',
+  },
+  {
+    id: 'c3d4e5f6-a7b8-4c5d-0e1f-2a3b4c5d6e7f',
+    name: 'Carrillada Ibérica',
+    description: 'Carrillada de cerdo ibérico estofada en salsa de vino tinto',
+    price: 1250, // 12.50€
+    allergens: ['sulfites'],
+    category: 'mains',
+    available: true,
+    image_url: '/carrillada.png',
+  },
+  {
+    id: 'd4e5f6a7-b8c9-4d5e-1f2a-3b4c5d6e7f8a',
+    name: 'Ensaladilla Rusa',
+    description: 'Ensaladilla tradicional con atún de calidad y mahonesa casera',
+    price: 450, // 4.50€
+    allergens: ['eggs', 'fish'],
+    category: 'starters',
+    available: true,
+    image_url: '/ensaladilla.png',
+  },
+  {
+    id: 'e5f6a7b8-c9d0-4e5f-2a3b-4c5d6e7f8a9b',
+    name: 'Macarrones Caseros',
+    description: 'Macarrones con salsa de tomate casera y carne picada',
+    price: 750, // 7.50€
+    allergens: ['gluten'],
+    category: 'mains',
+    available: true,
+    image_url: '/macarrones.png',
+  },
+  {
+    id: 'f6a7b8c9-d0e1-4f5a-3b4c-5d6e7f8a9b0c',
+    name: 'Serranito',
+    description: 'Bocadillo andaluz con lomo, jamón serrano y pimiento verde',
+    price: 550, // 5.50€
+    allergens: ['gluten'],
+    category: 'starters',
+    available: true,
+    image_url: '/serranito.png',
+  },
+  {
+    id: 'a7b8c9d0-e1f2-4a5b-4c5d-6e7f8a9b0c1d',
+    name: 'Coca-Cola',
+    description: 'Refresco de cola 330ml',
+    price: 200, // 2.00€
+    allergens: [],
+    category: 'drinks',
+    available: true,
+    image_url: '/cola.png',
+  },
+];
+
+export { users, customers, invoices, revenue, recipes };

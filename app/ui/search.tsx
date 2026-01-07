@@ -10,6 +10,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
 
   function handleSearch(term: string) {
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1"); // Reset to first page on new search
     if (term) {
       params.set("query", term);
     } else {

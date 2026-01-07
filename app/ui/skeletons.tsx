@@ -216,3 +216,71 @@ export function InvoicesTableSkeleton() {
     </div>
   );
 }
+
+export function RecipesTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="inline-block min-w-full align-middle">
+        <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+          <table className="hidden min-w-full text-gray-900 md:table">
+            <thead className="rounded-lg text-left text-sm font-normal">
+              <tr>
+                <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
+                  Receta
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Descripción
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Precio
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Categoría
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Estado
+                </th>
+                <th scope="col" className="relative py-3 pl-6 pr-3">
+                  <span className="sr-only">Acciones</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white">
+              {[...Array(6)].map((_, i) => (
+                <tr
+                  key={i}
+                  className="w-full border-b border-gray-100 last-of-type:border-none"
+                >
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-lg bg-gray-200"></div>
+                      <div className="h-6 w-32 rounded bg-gray-200"></div>
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <div className="h-6 w-64 rounded bg-gray-200"></div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <div className="h-6 w-16 rounded bg-gray-200"></div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <div className="h-6 w-20 rounded bg-gray-200"></div>
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <div className="h-6 w-24 rounded-full bg-gray-200"></div>
+                  </td>
+                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <div className="flex justify-end gap-3">
+                      <div className="h-8 w-8 rounded bg-gray-200"></div>
+                      <div className="h-8 w-8 rounded bg-gray-200"></div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}

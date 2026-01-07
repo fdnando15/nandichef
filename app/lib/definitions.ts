@@ -90,6 +90,22 @@ export type InvoiceForm = {
 // Nandi Chef Menu Types
 export type MenuCategory = 'starters' | 'mains' | 'desserts' | 'drinks';
 
+export type AllergenType = 
+  | 'gluten' 
+  | 'dairy' 
+  | 'eggs' 
+  | 'fish' 
+  | 'shellfish' 
+  | 'nuts' 
+  | 'peanuts' 
+  | 'soy' 
+  | 'celery' 
+  | 'mustard' 
+  | 'sesame' 
+  | 'sulfites' 
+  | 'lupin' 
+  | 'molluscs';
+
 export type Allergen = {
   id: string;
   name: string;
@@ -106,4 +122,31 @@ export type MenuItem = {
   image: string; // path to image in /public
   allergens: string[]; // array of allergen IDs
   available: boolean;
+};
+
+// Recipe Types (Products)
+export type Recipe = {
+  id: string;
+  name: string;
+  description: string;
+  price: number; // en centavos
+  allergens: AllergenType[];
+  category: MenuCategory;
+  available: boolean;
+  image_url: string;
+};
+
+// Para formularios (sin ID, se genera automáticamente)
+export type RecipeForm = Omit<Recipe, 'id'>;
+
+// Para tabla de recetas
+export type RecipesTable = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: MenuCategory;
+  available: boolean;
+  image_url: string;
+  allergens: AllergenType[];
 };

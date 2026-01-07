@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
-import { invoices, customers, revenue, users } from '../lib/placeholder-data';
+import { invoices, customers, revenue, users, recipes } from '../lib/placeholder-data';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -101,6 +101,37 @@ async function seedRevenue() {
   return insertedRevenue;
 }
 
+async function seedRecipes() {
+  await sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+  
+  await sql`
+    CREATE TABLE IF NOT EXISTS recipes (
+      id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      description TEXT NOT NULL,
+      price INT NOT NULL,
+      allergens TEXT[] DEFAULT '{}',
+      category VARCHAR(50) NOT NULL,
+      available BOOLEAN DEFAULT true,
+      image_url VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
+  const insertedRecipes = await Promise.all(
+    recipes.map(
+      (recipe) => sql`
+        INSERT INTO recipes (id, name, description, price, allergens, category, available, image_url)
+        VALUES (${recipe.id}, ${recipe.name}, ${recipe.description}, ${recipe.price}, ${recipe.allergens}, ${recipe.category}, ${recipe.available}, ${recipe.image_url})
+        ON CONFLICT (id) DO NOTHING;
+      `,
+    ),
+  );
+
+  return insertedRecipes;
+}
+
 export async function GET() {
   try {
     const result = await sql.begin((sql) => [
@@ -108,6 +139,7 @@ export async function GET() {
       seedCustomers(),
       seedInvoices(),
       seedRevenue(),
+      seedRecipes(),
     ]);
 
     return Response.json({ message: 'Database seeded successfully' });
